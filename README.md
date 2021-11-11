@@ -16,7 +16,7 @@ Fork of Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/p
 
     #!/bin/bash
     source /path/to/bash-logger.sh
-	LOG_LEVEL="INFO"
+    LOG_LEVEL="INFO"
     INFO "This is a test info log"
 
 ```
