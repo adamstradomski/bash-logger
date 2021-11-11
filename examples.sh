@@ -1,10 +1,13 @@
 #!/bin/bash
 #--------------------------------------------------------------------------------------------------
 # Bash Logger
-# Copyright (c) Dean Rather
+# Copyright (c) Dean Rather, Adam Stradomski
 # Licensed under the MIT license
 # http://github.com/deanrather/bash-logger
 #--------------------------------------------------------------------------------------------------
+
+# Log level can be set outside scripts
+export LOG_LEVEL="DEBUG"
 
 # Including the logger functions
 source bash-logger.sh
@@ -53,6 +56,18 @@ CRITICAL "Example Critical log"
 ALERT "Example Alert log"
 EMERGENCY "Example Emergency log"
 
+export LOG_LEVEL="NOTICE"
+# Example of all log levels
+echo # newline
+DEBUG "Example Debug log will not be logged"
+INFO "Example Info log will not be logged"
+NOTICE "Example Notice log will be logged"
+WARNING "Example Warning log will be logged"
+ERROR "Example Error log will be logged"
+CRITICAL "Example Critical log will be logged"
+ALERT "Example Alert log will be logged"
+EMERGENCY "Example Emergency log will be logged"
+
 # Overwriting default log behavior (eg. adding another echo)
 echo # newline
 INFO "Adding additional default behavior"
@@ -63,3 +78,4 @@ LOG_HANDLER_DEFAULT() {
     echo "logged to logfile"
 }
 NOTICE "test notice log"
+

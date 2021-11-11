@@ -1,7 +1,7 @@
 #!/bin/bash
 #--------------------------------------------------------------------------------------------------
 # Bash Logger
-# Copyright (c) Dean Rather
+# Copyright (c) Dean Rather, Adam Stradomski
 # Licensed under the MIT license
 # http://github.com/deanrather/bash-logger
 #--------------------------------------------------------------------------------------------------
@@ -20,7 +20,9 @@ export LOG_COLOR_ERROR="\033[1;31m"                 # Red
 export LOG_COLOR_CRITICAL="\033[44m"                # Blue Background
 export LOG_COLOR_ALERT="\033[43m"                   # Yellow Background
 export LOG_COLOR_EMERGENCY="\033[41m"               # Red Background
+export LOG_LEVEL_DEFAULT="ERROR"
 export RESET_COLOR="\033[0m"
+declare -A levels=([DEBUG]=0 [INFO]=1 [NOTICE]=2 [WARNING]=3 [ERROR]=4 [CRITICAL]=5 [ALERT]=6 [EMERGENCY]=7 )
 
 #--------------------------------------------------------------------------------------------------
 # Individual Log Functions
@@ -74,6 +76,9 @@ LOG() {
 LOG_HANDLER_DEFAULT() {
     # $1 - level
     # $2 - message
+    [[ ${levels[$1]} ]] || return 1 
+    [[ ${levels[$LOG_LEVEL]} ]] || LOG_LEVEL=$LOG_LEVEL_DEFAULT
+    (( ${levels[$1]} < ${levels[$LOG_LEVEL]} )) && return 2	
     local formatted_log="$(FORMAT_LOG "$@")"
     LOG_HANDLER_COLORTERM "$1" "$formatted_log"
     LOG_HANDLER_LOGFILE "$1" "$formatted_log"

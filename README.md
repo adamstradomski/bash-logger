@@ -4,8 +4,9 @@ Fork of Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/p
 
 ## Contributors
 
-- Dean Rather
 - Fred Palmer
+- Dean Rather
+- Adam Stradomski
 
 ## Using Bash Logger
 
@@ -30,8 +31,7 @@ Fork of Bash Logger designed to incorperate [PSR-3](http://www.php-fig.org/psr/p
 
 ### Logging Levels
 
-Bash Logger supports the logging levels described by [RFC 5424](http://tools.ietf.org/html/rfc5424).
-
+Bash Logger supports the logging levels described by [RFC 5424](http://tools.ietf.org/html/rfc5424). Logging levels in order of priority: 
 - **DEBUG** Detailed debug information.
 
 - **INFO** Interesting events. Examples: User logs in, SQL logs.
@@ -54,11 +54,16 @@ Bash Logger supports the logging levels described by [RFC 5424](http://tools.iet
 
 - **EMERGENCY** Emergency: system is unusable.
 
+### Log level
+
+- Use the LOG_LEVEL variable to determine the logs to be logged. For example, LOG_LEVEL="INFO" will disable logging of debug level messages. 
+
 ## Handlers
 
 By default:
 - Logs are displayed in colour
 - Logs are written to `~/bash-logger.log`
+- Logs above level ERROR will be logged. Use LOG_LEVEL="DEBUG" to log all log levels. 
 - **error** level logs and above `exit` with an error code
 
 The colours, logfile, default behavior, and log-level behavior can all be overwritten, see [examples.sh](examples.sh) for examples.
