@@ -63,7 +63,7 @@ Bash Logger supports the logging levels described by [RFC 5424](http://tools.iet
 By default:
 - Logs are displayed in colour
 - Logs are written to `~/bash-logger.log`
-- Logs above level ERROR will be logged. Use LOG_LEVEL="DEBUG" to log all log levels. 
+- Only logs above level DEBUG will be logged by default. Use LOG_LEVEL="DEBUG" to log all log levels. 
 - **error** level logs and above `exit` with an error code
 
 The colours, logfile, default behavior, and log-level behavior can all be overwritten, see [examples.sh](examples.sh) for examples.

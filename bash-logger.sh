@@ -20,7 +20,7 @@ export LOG_COLOR_ERROR="\033[1;31m"                 # Red
 export LOG_COLOR_CRITICAL="\033[44m"                # Blue Background
 export LOG_COLOR_ALERT="\033[43m"                   # Yellow Background
 export LOG_COLOR_EMERGENCY="\033[41m"               # Red Background
-export LOG_LEVEL_DEFAULT="ERROR"
+export LOG_LEVEL_DEFAULT="INFO"
 export RESET_COLOR="\033[0m"
 declare -A levels=([DEBUG]=0 [INFO]=1 [NOTICE]=2 [WARNING]=3 [ERROR]=4 [CRITICAL]=5 [ALERT]=6 [EMERGENCY]=7 )
 
