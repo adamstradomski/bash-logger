@@ -24,6 +24,9 @@ export LOG_LEVEL_DEFAULT="ERROR"
 export RESET_COLOR="\033[0m"
 declare -A levels=([DEBUG]=0 [INFO]=1 [NOTICE]=2 [WARNING]=3 [ERROR]=4 [CRITICAL]=5 [ALERT]=6 [EMERGENCY]=7 )
 
+# If global LOG_LEVEL is empty, set default log level
+[[ -z $LOG_LEVEL ]] && LOG_LEVEL=$LOG_LEVEL_DEFAULT
+
 #--------------------------------------------------------------------------------------------------
 # Individual Log Functions
 # These can be overwritten to provide custom behavior for different log levels
@@ -76,9 +79,9 @@ LOG() {
 LOG_HANDLER_DEFAULT() {
     # $1 - level
     # $2 - message
-    [[ ${levels[$1]} ]] || return 1 
-    [[ ${levels[$LOG_LEVEL]} ]] || LOG_LEVEL=$LOG_LEVEL_DEFAULT
-    (( ${levels[$1]} < ${levels[$LOG_LEVEL]} )) && return 2	
+    [[ ${levels[$1]} ]] || return 1  									## unknown log level for log message
+    [[ ${levels[$LOG_LEVEL]} ]] || LOG_LEVEL=$LOG_LEVEL_DEFAULT			## unknown global log level
+    (( ${levels[$1]} < ${levels[$LOG_LEVEL]} )) && return 2				## log message log level is lower than global log level 
     local formatted_log="$(FORMAT_LOG "$@")"
     LOG_HANDLER_COLORTERM "$1" "$formatted_log"
     LOG_HANDLER_LOGFILE "$1" "$formatted_log"
